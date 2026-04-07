@@ -1,0 +1,16 @@
+customer_id,first_name,last_name,email,phone,city,country
+C001,  alice,JOHNSON,Alice.Johnson@Example.COM,617-555-0101,boston,US
+C002,BOB,  Smith  ,  bob.smith@company.org,212-555-0188,  New York,US
+C003,carol,white,CAROL.WHITE@BUSINESS.NET  ,415-555-0234,san francisco,us
+C004,  DAVID  ,Lee,David.Lee@Corp.co.uk,  312-555-0312,chicago  ,US
+C005,Elena,GARCIA,elena.garcia@startup.io,617-555-0456,  Cambridge,US
+C006,frank,  NGUYEN  ,Frank.Nguyen@Agency.COM,713-555-0567,houston,us
+C007,  GRACE,kim,grace.kim@global.net,206-555-0678,seattle  ,US
+C008,henry,PATEL,  Henry.Patel@Ventures.ORG  ,404-555-0789,atlanta,us
+C009,isabella,ROSSI,Isabella.Rossi@Design.CO  ,305-555-0890,miami,US
+C010,  JAMES,CHEN  ,james.chen@enterprise.com,650-555-0901,  Palo Alto,US
+C011,kate,MURPHY,Kate.Murphy@Consult.IE,617-555-1011,Boston,US
+C012,  liam,OKONKWO,liam.okonkwo@growth.io  ,  512-555-1122,austin,us
+C013,MARIA,SANTOS,Maria.Santos@Finance.COM,646-555-1233,new york,US
+C014,noah,  BERG  ,noah.berg@nordic.se,  617-555-1344,  cambridge  ,us
+C015,OLIVIA,TRAN,olivia.tran@pacific.net,503-555-1455,portland,US

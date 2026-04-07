@@ -1,0 +1,21 @@
+sku,product_name,category,quantity,unit_price,reorder_level
+SKU-001,Laptop Stand,Accessories,45,29.99,20
+SKU-002,Wireless Mouse,Peripherals,120,19.99,30
+SKU-003,USB-C Hub,Peripherals,33,49.99,15
+SKU-004,Webcam HD,Peripherals,18,79.99,10
+SKU-005,Desk Lamp,Furniture,62,34.99,20
+SKU-006,Mechanical Keyboard,Peripherals,27,89.99,15
+SKU-007,Monitor Riser,Accessories,8,24.99,10
+SKU-008,Cable Management Kit,Accessories,91,14.99,25
+SKU-009,Ergonomic Chair,Furniture,6,349.99,5
+SKU-010,Whiteboard,Office Supplies,14,59.99,8
+SKU-011,Noise-Cancelling Headphones,Peripherals,22,129.99,10
+SKU-012,Desk Organiser,Accessories,55,19.99,20
+SKU-013,Standing Desk Converter,Furniture,9,199.99,5
+SKU-014,Portable Charger,Accessories,44,39.99,20
+SKU-015,Blue Light Glasses,Accessories,67,24.99,25
+SKU-016,HDMI Cable 2m,Peripherals,103,9.99,40
+SKU-017,Printer Paper (500 sheets),Office Supplies,88,12.99,50
+SKU-018,Sticky Notes Pack,Office Supplies,142,4.99,60
+SKU-019,Laptop Sleeve 15in,Accessories,31,22.99,15
+SKU-020,Power Strip (6 outlet),Accessories,17,29.99,10
