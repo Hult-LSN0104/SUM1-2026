@@ -52,6 +52,28 @@ If you prefer to work on your own machine:
 
 ---
 
+## Setting Up Your Anthropic API Key
+
+Some activities in this course use AI via the Anthropic API. You'll need your own key.
+
+1. Go to [console.anthropic.com](https://console.anthropic.com) and create an account
+2. Navigate to **Settings → Billing** and add $5 in credits (plenty for the whole course)
+3. Navigate to **Settings → API Keys → Create Key**, copy the key (starts with `sk-ant-...`)
+4. On GitHub: click your profile picture → **Settings → Codespaces → Codespaces secrets → New secret**
+5. Name: `ANTHROPIC_API_KEY`, Value: paste your key
+6. Under "Repository access," select your copy of this course repo
+7. **Restart your Codespace** for the secret to load
+
+Verify it worked — in your Codespace terminal:
+
+```bash
+echo $ANTHROPIC_API_KEY | wc -c
+```
+
+Should show ~108 (not 1). If you get 1, the secret didn't load — stop and start your Codespace from github.com/codespaces.
+
+---
+
 ## Course Structure at a Glance
 
 | Week | Topic | Sessions |
