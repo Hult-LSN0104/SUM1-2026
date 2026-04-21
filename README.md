@@ -42,7 +42,7 @@ Works entirely in your browser. Nothing to install.
 
 > Your Codespace saves automatically. You can close the tab and come back later — your work will still be there.
 
-### Option B — Run locally
+### Option B — Run locally — {{ ONLY IF OPTION A WILL NOT WORK }}
 If you prefer to work on your own machine:
 
 1. Install [Python 3.x](https://python.org/downloads) and [VS Code](https://code.visualstudio.com)
