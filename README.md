@@ -70,7 +70,8 @@ Verify it worked — in your Codespace terminal:
 echo $ANTHROPIC_API_KEY | wc -c
 ```
 
-Should show ~108 (not 1). If you get 1, the secret didn't load — stop and start your Codespace from github.com/codespaces.
+Should show ~108 (not 1). 
+If you get 1, the secret didn't load. Stop and start your Codespace from github.com/codespaces.
 
 ---
 
