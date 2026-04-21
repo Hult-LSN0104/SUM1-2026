@@ -1,6 +1,6 @@
 # GitHub: The Full Reference
 
-> **You don't need to read this on Day 1.** The [5-minute intro](../sessions/session-01/github-intro.md) covers what you actually need for this course. Come back here when you want to understand more.
+> **You don't need to read this on Day 1.** The [5-minute intro](../sessions/github-intro.md) covers what you actually need for this course. Come back here when you want to understand more.
 
 ---
 ## 🤓 Course overview and learning outcomes 
