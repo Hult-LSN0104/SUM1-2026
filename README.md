@@ -129,4 +129,5 @@ See [`resources.md`](resources.md) for a curated list of links — documentation
 ---
 
 *This repository is for LSN-0104 students at Hult International Business School.* 
+
 *Please do not share starter code or solutions publicly.*
