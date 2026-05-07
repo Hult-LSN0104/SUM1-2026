@@ -1,84 +1,114 @@
-# Problem Set 1 — Business Card Generator
-**LSN-0104 | Due: Before Session 3**
-**Weight: 6% of final grade**
+# Problem Set 1 — Variables, Data Types & Strings
+
+**LSN-0104 | Covers Sessions 1–4 | Due: End of Week 2**
 
 ---
 
-## Overview
+## Submission Instructions
 
-You've learned how to store information in variables, work with Python's core data types, and print formatted output. Now put it together in a small, complete program.
-
-You'll build a **Business Card Generator** — a program that asks a user for their professional details and prints a formatted business card to the screen.
+- Submit a single Python file named `ps1_<your_last_name>.py` via the course portal.
+- All code must run without errors in Python 3.x. Test before submitting.
+- Use comments to clearly label each exercise (e.g., `# Exercise 1`).
+- Academic integrity: all code must be your own. Collaboration is encouraged for concepts, not code.
+- Late submissions: -10% per day. Contact the instructor in advance for extensions.
 
 ---
 
-## Requirements
+## Exercise 1 — Hello, Business World! (10 pts)
 
-Your program must:
+Write a program that:
 
-1. **Collect the following information from the user** using `input()`:
-   - Full name
-   - Job title
-   - Company name
-   - Email address
-   - Phone number
-   - City and country
+- Asks the user for their first name, last name, and company name using `input()`
+- Prints a professional greeting: `Hello, [First] [Last] from [Company]! Welcome to Python.`
+- Prints the full name in ALL CAPS and the company name in Title Case on separate lines
+- Prints the total number of characters in the full name (including the space)
 
-2. **Store each value in a clearly named variable** with an appropriate data type.
-
-3. **Print a formatted business card** that looks something like this:
+**Expected output example** (for input: `Maria` / `Garcia` / `globex industries`):
 
 ```
-╔══════════════════════════════════════╗
-  Alice Johnson
-  Head of Product
-  Northbridge Solutions
-
-  alice.johnson@northbridge.com
-  +1 617-555-0101
-  Boston, United States
-╚══════════════════════════════════════╝
+Hello, Maria Garcia from Globex Industries! Welcome to Python.
+Full name (uppercase): MARIA GARCIA
+Company (title case): Globex Industries
+Name length: 12 characters
 ```
 
-You don't have to use the exact box style above — but the card should be clearly laid out and easy to read.
+---
 
-4. **Use at least one f-string** to build the output.
+## Exercise 2 — Invoice Calculator (20 pts)
 
-5. **Include at least three comments** explaining what your code does.
+Build an interactive invoice calculator that:
+
+- Asks the user for: product name, unit price (`float`), and quantity (`int`)
+- Calculates: `subtotal = price × quantity`
+- Applies an 8% sales tax to get the total
+- Prints a formatted invoice summary with:
+    - Product name, unit price, quantity, subtotal, tax amount, and total
+    - All currency values displayed with a `$` sign and 2 decimal places
+- Uses at least one f-string
+
+**Expected output example** (product: `Widget Pro`, price: `24.99`, qty: `5`):
+
+```
+===== INVOICE =====
+Product:     Widget Pro
+Unit Price:  $24.99
+Quantity:    5
+Subtotal:    $124.95
+Tax (8%):    $9.996
+Total Due:   $134.95
+===================
+```
 
 ---
 
-## Hints
+## Exercise 3 — Customer Data Cleaner (20 pts)
 
-- `input()` always returns a string — that's fine for all fields in this program.
-- To print a line of repeated characters: `print("=" * 40)`
-- You can use `\n` inside a string to add a blank line: `print("line one\nline two")`
-- Keep your variable names descriptive: `full_name` is better than `n`.
+A company receives customer data that is inconsistently formatted. Given this messy data (hard-code it in your program):
+
+```python
+raw_name  = '  jANe  dOe  '
+raw_email = '  Jane.Doe@COMPANY.COM  '
+raw_phone = '(617) 555-0142'
+```
+
+Your program should:
+
+- Strip whitespace from name and email
+- Convert name to Title Case and email to lowercase
+- Check if the email ends with `'@company.com'` — print `'Internal employee'` or `'External contact'`
+- Extract the area code from the phone number (first 3 digits inside the parentheses)
+- Print a clean formatted customer card showing all cleaned values and findings
 
 ---
 
-## Stretch Goals *(optional, no extra marks)*
+## Exercise 4 — Profit Margin Calculator (10 pts)
 
-- Ask the user for their LinkedIn URL and include it on the card.
-- Print the name in ALL CAPS using a string method.
-- Print two cards side by side for two different people.
+Build a program that:
+
+- Asks the user for revenue and cost of goods sold (COGS)
+- Calculates gross profit (`revenue – COGS`) and gross margin % (`(gross profit / revenue) × 100`)
+- Uses the `math` module to also print the ceiling and floor of the margin percentage
+- Formats output with 2 decimal places and a `%` symbol
+
+**Bonus (+5 pts):** use `round()` to also display a rounded margin and explain in a comment when rounding vs. truncating matters in finance.
 
 ---
 
 ## Submission
 
-Upload your completed `starter.py` file to Canvas by the deadline.
-Your file should run without errors from top to bottom.
+Upload your completed `ps1_<your_last_name>.py` to the course portal by the deadline.
 
 ---
 
 ## Grading
 
-| Criterion | Marks |
-|-----------|-------|
-| Program runs without errors | 3 |
-| All six fields collected and stored in variables | 2 |
-| Output is clearly formatted and readable | 3 |
-| At least one f-string used | 1 |
-| At least three comments present | 1 |
-| **Total** | **10** |
+**Total: 60 points + 5 bonus**
+
+| Criterion | Points |
+| --- | --- |
+| Exercise 1: Correct use of `input()`, string methods, and `len()` | 10 |
+| Exercise 2: Correct calculations, formatting, and f-strings | 20 |
+| Exercise 3: String cleaning, conditional logic, and formatted output | 20 |
+| Exercise 4: Arithmetic, `math` module, and percentage formatting | 10 |
+| Code quality: clear comments, descriptive variable names, readable structure | 5 (bonus) |
+| **Total** | **60 + 5 bonus** |
