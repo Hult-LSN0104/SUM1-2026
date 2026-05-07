@@ -10,7 +10,8 @@
 - All code must run without errors. Test edge cases before submitting.
 - Use docstrings for every function you define.
 - Academic integrity: all code must be your own.
-- Late submissions: -10% per day.
+- Per Hult policy, assignments will be open for a maximum of 48 hours after the due date.
+- Late submissions: After 48 hours beyond due date and time, any non-submitted assignments receive a grade of '0'.
 
 ---
 
