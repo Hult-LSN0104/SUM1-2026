@@ -26,7 +26,7 @@ The fastest way to start coding — no installation required. Click the button b
 📁 problem-sets/      Assignments with instructions and starter files
 📁 reference/         A primer on how to use GitHub 
 📁 sessions/          Slides and starter code, organised by session
-📁 README.md          A files to explain things around here
+📁 README.md          This file to explain things around here
 📁 requirements.txt   Lists out needs for this repository to run properly
 📄 resources.md       Useful links: docs, practice sites, free books
 ```
