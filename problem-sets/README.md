@@ -6,8 +6,8 @@ Weekly assignments. A new problem set is released after the second session of ea
 
 Each problem set folder contains:
 
-- `instructions.md` — what to do, what's graded
-- `starter.py` — a file with structure already laid out; fill in your code where indicated
+- `ps#-instructions.md` — what to do, what's graded
+- `ps#-starter.py` — a file with structure already laid out; fill in your code where indicated
 
 ## Submission
 
