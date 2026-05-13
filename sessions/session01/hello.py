@@ -1,4 +1,4 @@
-# This asks user for input and waits
+# This asks user for input (less than 5) and waits
 x = input("Give me a number less than 5 ") 
 
 # Converts the STRING input into an INTEGER
