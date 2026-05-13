@@ -9,6 +9,6 @@ y = 6
 
 # Conditional check - is z less than y?
 if (z < y): 
-    # This runs ONLY if value of z is less than y 
+    # This runs ONLY if value of z (er.. x) is less than y 
     print("x is less than y") 
 
