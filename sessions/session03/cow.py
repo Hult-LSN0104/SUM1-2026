@@ -1,3 +1,3 @@
 import cowsay
 
-cowsay.cow("Hello, \nI'm at Hult as a talking cow!")
+cowsay.cow("Hello, I'm at Hult as a talking cow!")
