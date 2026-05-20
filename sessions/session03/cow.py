@@ -1,3 +1,3 @@
 import cowsay
 
-cowsay.cow("Hey, I'm a talking cow!")
+cowsay.cow("MOO.") -c "tux"
