@@ -1,6 +1,6 @@
 # Problem Set 2 — Control Structures & Functions
 
-**LSN-0104 | Covers Sessions 5–8 | Due: End of Week 4**
+**LSN-0104 | Covers Sessions 4–6 | Due: End of Week 4**
 
 ---
 
