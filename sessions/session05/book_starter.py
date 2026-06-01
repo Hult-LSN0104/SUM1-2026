@@ -1,108 +1,130 @@
-# Introduction to Object-Oriented Programming: The Book Class
-# ====================================================
-#
-# In this exercise, you'll create a Book class that represents a book in a library.
-# Follow the instructions in the TODO comments to complete the implementation.
-#
-# Learning Objectives:
-# 1. Understand how to create a class
-# 2. Learn about class attributes and methods
-# 3. Practice using the __init__ constructor
-# 4. Implement instance methods
-# 5. Create string representation of objects
+"""
+Book Class Starter File
+=======================
+In this exercise, you will build a simple Book class that tracks
+book information and whether it is checked out or available.
+
+Complete each TODO section below. Do NOT change any method names or
+the test function at the bottom.
+"""
+
 
 class Book:
-    """
-    A class representing a book in a library.
-    
-    Attributes:
-        title (str): The title of the book
-        author (str): The author of the book
-        pages (int): The number of pages in the book
-        is_available (bool): Whether the book is available for checkout
-    """
-    
+    """Represents a book in a library system."""
+
     def __init__(self, title, author, pages):
         """
-        Initialize a new Book object.
-        
-        TODO 1: Initialize the book's attributes:
-        - Set the title attribute to the title parameter
-        - Set the author attribute to the author parameter
-        - Set the pages attribute to the pages parameter
-        - Set is_available to True by default (all new books start as available)
+        TODO 1 – Initialize the book's attributes.
+
+        Parameters:
+            title  (str): The title of the book.
+            author (str): The author's name.
+            pages  (int): The number of pages.
+
+        Steps:
+            1. Remove the `pass` statement below.
+            2. Use self.attribute_name = value to store each parameter.
+            3. Also create self.is_available and set it to True.
+
+        Example:
+            self.title = title
         """
-        pass  # Remove this line when you start implementing
-    
+        # ADD YOUR CODE HERE
+        pass
+
     def checkout(self):
         """
-        Mark the book as checked out (not available).
-        
-        TODO 2: Implement the checkout method:
-        - If the book is available, set is_available to False and return True
-        - If the book is not available, return False
+        TODO 2 – Check out the book if it is available.
+
+        Returns:
+            True  if the book was successfully checked out.
+            False if the book was already checked out.
+
+        Steps:
+            1. Remove the `pass` statement below.
+            2. Use an if-else statement to check self.is_available.
+            3. If available:  set self.is_available = False, return True.
+            4. If not available: return False.
         """
-        pass  # Remove this line when you start implementing
-    
+        # ADD YOUR CODE HERE
+        pass
+
     def return_book(self):
         """
-        Mark the book as returned (available).
-        
-        TODO 3: Implement the return_book method:
-        - Set is_available to True (the book is now available)
-        - Return True to indicate successful return
+        TODO 3 – Return the book (mark it as available again).
+
+        Returns:
+            True always, to indicate the return was successful.
+
+        Steps:
+            1. Remove the `pass` statement below.
+            2. Set self.is_available to True.
+            3. Return True.
+
+        Note: You do NOT need to check any conditions here.
         """
-        pass  # Remove this line when you start implementing
-    
+        # ADD YOUR CODE HERE
+        pass
+
     def get_info(self):
         """
-        Return a string with the book's information.
-        
-        TODO 4: Return a string that includes:
-        - The book's title
-        - The author's name
-        - The number of pages
-        - Whether it's available or not
-        
-        Example format: "Harry Potter by J.K. Rowling (300 pages) - Available"
+        TODO 4 – Build and return a descriptive string about the book.
+
+        Returns:
+            A formatted string with the book's details.
+
+        Steps:
+            1. Remove the `pass` statement below.
+            2. Convert self.is_available to the word "Available" or
+               "Not Available".
+            3. Use an f-string to combine all attributes.
+
+        Expected format:
+            "The Hobbit by J.R.R. Tolkien (295 pages) - Available"
         """
-        pass  # Remove this line when you start implementing
+        # ADD YOUR CODE HERE
+        pass
 
 
-# Test your implementation
+# ---------------------------------------------------------------------------
+# Test function – DO NOT modify anything below this line
+# ---------------------------------------------------------------------------
+
 def test_book_class():
-    """
-    Test the Book class implementation.
-    """
-    # Create a new book
-    book = Book("The Hobbit", "J.R.R. Tolkien", 295)
-    
-    # Test initial state
+    """Runs a series of tests on your Book class and prints the results."""
+
+    print("=== Testing Book Class ===")
+    title  = input("Enter the book name: ")
+    author = input("Enter the author name: ")
+    pages  = int(input("Enter the number of pages: "))
+
+    book = Book(title, author, pages)
+
+    # Test 1 – Initial state
+    print("\nTest 1: Initial state")
     print("Initial book info:", book.get_info())
-    
-    # Test checkout
-    success = book.checkout()
-    print("Checkout successful?", success)
+    # Expected: <title> by <author> (<pages> pages) - Available
+
+    # Test 2 – First checkout
+    print("\nTest 2: First checkout attempt")
+    result = book.checkout()
+    print("Checkout successful?", result)           # Expected: True
     print("After checkout:", book.get_info())
-    
-    # Try to checkout again (should fail)
-    success = book.checkout()
-    print("Second checkout successful?", success)
-    
-    # Return the book
-    success = book.return_book()
-    print("Return successful?", success)
+    # Expected: <title> by <author> (<pages> pages) - Not Available
+
+    # Test 3 – Second checkout (should fail)
+    print("\nTest 3: Second checkout attempt")
+    result2 = book.checkout()
+    print("Second checkout successful?", result2)   # Expected: False
+
+    # Test 4 – Return
+    print("\nTest 4: Return book")
+    result3 = book.return_book()
+    print("Return successful?", result3)            # Expected: True
     print("After return:", book.get_info())
+    # Expected: <title> by <author> (<pages> pages) - Available
 
 
+# Run the tests automatically when this file is executed
 if __name__ == "__main__":
     test_book_class()
-
-
-# Expected Output:
-# Initial book info: The Hobbit by J.R.R. Tolkien (295 pages) - Available
-# Checkout successful? True
-# After checkout: The Hobbit by J.R.R. Tolkien (295 pages) - Not Available
-# Second checkout successful? False
-# Return successful? True
-# After return: The Hobbit by J.R.R. Tolkien (295 pages) - Available
