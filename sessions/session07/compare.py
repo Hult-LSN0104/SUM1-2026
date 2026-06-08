@@ -48,7 +48,7 @@ def compare_sorting_algorithms(arr_size=1000):
     }
     
     # Dictionary to store all sorting functions
-    sorting_functions =
+    sorting_functions = {
         "Sort 1": SortingAlgorithms().sort_one,
         "Sort 2": SortingAlgorithms().sort_two,
         "Sort 3": SortingAlgorithms().sort_three,
