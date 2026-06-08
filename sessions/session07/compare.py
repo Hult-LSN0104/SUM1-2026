@@ -1,7 +1,8 @@
-# main.py
+# compare.py
 
 import time
 import random
+import os
 from sort import SortingAlgorithms
 
 def measure_sort_time(sort_func, arr):
@@ -14,61 +15,60 @@ def measure_sort_time(sort_func, arr):
 
 def compare_sorting_algorithms(arr_size=1000):
     """Compare the performance of different sorting algorithms."""
+
+    # Files are expected in a folder called 'files_to_test' next to this script
+    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "files_to_test")
+
     def read_array_from_file(filename):
         """Read array from a file. Supports txt and csv formats."""
+        filepath = os.path.join(base_dir, filename)
         try:
-            with open(filename, 'r') as file:
+            with open(filepath, 'r') as file:
                 if filename.endswith('.csv'):
-                    # For CSV files, use csv module
                     import csv
                     reader = csv.reader(file)
-                    # Read first row and convert to integers
                     return [int(x.strip()) for x in next(reader) if x.strip()]
                 else:
-                    # For txt files, assume one number per line or space-separated
                     content = file.read()
                     if '\n' in content:
-                        # One number per line
                         return [int(x.strip()) for x in content.split('\n') if x.strip()]
                     else:
-                        # Space-separated numbers
                         return [int(x.strip()) for x in content.split() if x.strip()]
         except FileNotFoundError:
-            print(f"Warning: {filename} not found. Using default array.")
+            print(f"Warning: {filepath} not found. Using default random array.")
             return [random.randint(1, 1000) for _ in range(arr_size)]
-        except (ValueError, csv.Error) as e:
-            print(f"Error reading {filename}: {e}. Using default array.")
+        except (ValueError, Exception) as e:
+            print(f"Error reading {filepath}: {e}. Using default random array.")
             return [random.randint(1, 1000) for _ in range(arr_size)]
 
-    # Test cases to try - read from files with fallback to generated arrays
+    # Test cases — put your .txt files in the files_to_test folder
     test_arrays = {
-        "Random": read_array_from_file("/Users/ctoddlombardo/Dropbox/_Hult/Courses/CM-3/code/files_to_test/random50000.txt"),
-        "Already Sorted": read_array_from_file("/Users/ctoddlombardo/Dropbox/_Hult/Courses/CM-3/code/files_to_test/sorted50000.txt"),
-        "Reverse Sorted": read_array_from_file("/Users/ctoddlombardo/Dropbox/_Hult/Courses/CM-3/code/files_to_test/reversed50000.txt")
+        "Random":         read_array_from_file("random10000.txt"),
+        "Already Sorted": read_array_from_file("sorted10000.txt"),
+        "Reverse Sorted": read_array_from_file("reversed5000.txt"),
     }
-    
+
     # Dictionary to store all sorting functions
     sorting_functions = {
         "Sort 1": SortingAlgorithms().sort_one,
         "Sort 2": SortingAlgorithms().sort_two,
         "Sort 3": SortingAlgorithms().sort_three,
     }
-    
+
     # Compare each sorting algorithm with each test case
     results = {}
     for array_type, test_arr in test_arrays.items():
         print(f"\nTesting with {array_type} array:")
         print("-" * 40)
-        
+
         for sort_name, sort_func in sorting_functions.items():
             time_taken, _ = measure_sort_time(sort_func, test_arr)
             print(f"{sort_name}: {time_taken:.4f} seconds")
-            
-            # Store results for later analysis
+
             if array_type not in results:
                 results[array_type] = {}
             results[array_type][sort_name] = time_taken
-            
+
     return results
 
 def main():
