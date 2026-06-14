@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather App</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/jumbotron-narrow/">
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Weather App</h1>
+        <p>Check the weather anywhere</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <form method="post">
+        <div class="form-group">
+          <input type="text" name="city" class="form-control" placeholder="Enter city">
+        </div>
+        <button type="submit" class="btn btn-success">Get Weather</button>
+      </form>
+
+      {% if weather %}
+        <div class="alert alert-info" style="margin-top: 20px;">
+          <h3>{{ weather["city"] }}</h3>
+          <p class="lead">{{ weather["temp"] }}°F - {{ weather["description"] }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
