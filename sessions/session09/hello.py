@@ -4,11 +4,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello!"
+    return "<h2>Hello, Class!</h2>"
 
-"""@app.route("/<name>")
+@app.route("/<name>")
 def name(name):
-    return f"Hello, {name}!" """
+    return f"Hello, {name}!"
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+

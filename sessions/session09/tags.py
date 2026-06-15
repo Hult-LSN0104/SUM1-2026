@@ -6,6 +6,5 @@ app = Flask(__name__)
 def home():
     return render_template("tags.html")
    
-
 if __name__ == "__main__":
     app.run(debug=True)
