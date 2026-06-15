@@ -1,0 +1,16 @@
+date,rep_name,product,quantity,unit_price,region
+2026-04-01,Alice,Widget Pro,10,19.99,North
+2026-04-01,Alice,Gadget Plus,5,49.99,North
+2026-04-02,Bob,Widget Pro,8,19.99,South
+2026-04-02,Bob,Thingamajig,20,4.99,South
+2026-04-03,Carol,Gadget Plus,7,49.99,West
+2026-04-03,Carol,Widget Pro,12,19.99,West
+2026-04-04,Alice,Thingamajig,30,4.99,North
+2026-04-05,Bob,Gadget Plus,4,49.99,South
+2026-04-06,Carol,Thingamajig,25,4.99,West
+2026-04-07,Alice,Gadget Plus,8,49.99,North
+2026-04-08,Bob,Widget Pro,6,19.99,South
+2026-04-09,Carol,Widget Pro,9,19.99,West
+2026-04-10,Alice,Widget Pro,7,19.99,North
+2026-04-11,Bob,Thingamajig,15,4.99,South
+2026-04-12,Carol,Gadget Plus,6,49.99,West
