@@ -1,7 +1,6 @@
-import requests
 from flask import Flask, render_template, request
-
 from dotenv import load_dotenv
+import requests
 import os
 
 # Load environment variables
@@ -46,6 +45,7 @@ def tail():
         if data.get("cod") == 200:  # Check for valid response
             weather = {
                 "city": data["name"],
+                "country": data["sys"]["country"],
                 "temp": data["main"]["temp"],
                 "description": data["weather"][0]["description"]
             }
