@@ -7,7 +7,7 @@ def home():
     return "Hello!"
 
 @app.route("/<name>")
-def home(name):
+def name(name):
     return f"Hello, {name}!" 
 
 if __name__ == "__main__":
