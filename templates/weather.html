@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #fff; border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0,0,0,.15);
+            padding: 32px; width: 100%; max-width: 380px; text-align: center;
+        }
+        h1 { font-size: 1.6rem; color: #1e293b; margin-bottom: 20px; }
+        form { display: flex; gap: 8px; margin-bottom: 16px; }
+        input[type="text"] {
+            flex: 1; padding: 12px 14px; border: 1px solid #cbd5e1;
+            border-radius: 10px; font-size: 1rem; outline: none;
+        }
+        input[type="text"]:focus { border-color: #4facfe; }
+        button {
+            padding: 12px 18px; border: none; border-radius: 10px;
+            background: #4facfe; color: #fff; font-size: 1rem; cursor: pointer;
+        }
+        button:hover { background: #2d8fe0; }
+        .error { color: #dc2626; margin-top: 10px; font-size: .95rem; }
+        .result { margin-top: 20px; }
+        .result h2 { color: #1e293b; font-size: 1.3rem; }
+        .temp { font-size: 3rem; font-weight: 700; color: #0f172a; }
+        .desc { color: #475569; text-transform: capitalize; margin-bottom: 12px; }
+        .details { display: flex; justify-content: space-around; margin-top: 14px; font-size: .9rem; color: #475569; }
+        .details span { display: block; font-weight: 600; color: #1e293b; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Weather App</h1>
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter a city (e.g., Boston)" autofocus>
+            <button type="submit">Search</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        {% if weather %}
+            <div class="result">
+                <h2>{{ weather.city }}, {{ weather.country }}</h2>
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="{{ weather.description }}">
+                <p class="temp">{{ weather.temp }}&deg;C</p>
+                <p class="desc">{{ weather.description }}</p>
+                <div class="details">
+                    <div>Feels Like<span>{{ weather.feels_like }}&deg;C</span></div>
+                    <div>Humidity<span>{{ weather.humidity }}%</span></div>
+                    <div>Wind<span>{{ weather.wind }} m/s</span></div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

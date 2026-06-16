@@ -1,0 +1,489 @@
+"""
+LSN-0104 — Introduction to Programming with Python
+Problem Set 3: Data Collections & File Handling
+
+Author: Deepansh Lather
+Student ID: 230006046
+Date: June 2026
+"""
+
+import csv
+from datetime import datetime
+
+# =============================================================================
+# Exercise 1 — Inventory Manager (15 pts)
+# =============================================================================
+
+inventory = [
+    {"name": "Widget Pro",   "sku": "WP-001", "quantity": 25, "unit_price": 19.99},
+    {"name": "Gadget Plus",  "sku": "GP-002", "quantity": 10, "unit_price": 49.99},
+    {"name": "Thingamajig", "sku": "TJ-003", "quantity": 50, "unit_price":  4.99},
+]
+
+
+def view_items(items):
+    """
+    Print every item in the inventory in a readable, tabular format.
+
+    Args:
+        items (list[dict]): The inventory list.
+    """
+    if not items:
+        print("  (inventory is empty)")
+        return
+
+    # Column widths for clean alignment
+    print(f"\n  {'NAME':<20} {'SKU':<10} {'QTY':>6} {'UNIT PRICE':>12} {'LINE VALUE':>12}")
+    print("  " + "-" * 64)
+    for item in items:
+        line_value = item["quantity"] * item["unit_price"]
+        print(
+            f"  {item['name']:<20} {item['sku']:<10}"
+            f" {item['quantity']:>6} {item['unit_price']:>12.2f} {line_value:>12.2f}"
+        )
+
+
+def add_item(items):
+    """
+    Prompt the user for name, SKU, quantity, and unit_price,
+    then append a new dict to items.
+
+    Args:
+        items (list[dict]): The inventory list (modified in-place).
+    """
+    print("\n  -- Add New Item --")
+    name = input("  Name: ").strip()
+    sku  = input("  SKU:  ").strip()
+
+    # Validate quantity — must be a non-negative integer
+    while True:
+        try:
+            quantity = int(input("  Quantity: ").strip())
+            if quantity < 0:
+                raise ValueError
+            break
+        except ValueError:
+            print("  ✗ Please enter a non-negative whole number.")
+
+    # Validate unit_price — must be a non-negative float
+    while True:
+        try:
+            unit_price = float(input("  Unit Price: ").strip())
+            if unit_price < 0:
+                raise ValueError
+            break
+        except ValueError:
+            print("  ✗ Please enter a non-negative number (e.g. 9.99).")
+
+    items.append({"name": name, "sku": sku, "quantity": quantity, "unit_price": unit_price})
+    print(f"  ✓ '{name}' added to inventory.")
+
+
+def remove_item(items, sku):
+    """
+    Remove the item whose SKU matches (case-insensitive).
+    Print a message if the SKU is not found.
+
+    Args:
+        items (list[dict]): The inventory list (modified in-place).
+        sku   (str):        SKU to remove.
+    """
+    sku = sku.strip().upper()
+    for item in items:
+        if item["sku"].upper() == sku:
+            items.remove(item)
+            print(f"  ✓ Item '{item['name']}' (SKU: {sku}) removed.")
+            return
+    print(f"  ✗ SKU '{sku}' not found in inventory.")
+
+
+def update_quantity(items, sku, new_quantity):
+    """
+    Update the quantity for the item with the given SKU.
+    Print a message if the SKU is not found.
+
+    Args:
+        items        (list[dict]): The inventory list (modified in-place).
+        sku          (str):        SKU to look up.
+        new_quantity (int):        Replacement quantity value.
+    """
+    sku = sku.strip().upper()
+    for item in items:
+        if item["sku"].upper() == sku:
+            old_qty = item["quantity"]
+            item["quantity"] = new_quantity
+            print(f"  ✓ '{item['name']}': quantity updated {old_qty} → {new_quantity}.")
+            return
+    print(f"  ✗ SKU '{sku}' not found in inventory.")
+
+
+def total_value(items):
+    """
+    Return the total monetary value of the inventory
+    as the sum of (quantity * unit_price) for every item.
+
+    Args:
+        items (list[dict]): The inventory list.
+
+    Returns:
+        float: Total inventory value.
+    """
+    return sum(item["quantity"] * item["unit_price"] for item in items)
+
+
+def inventory_menu():
+    """
+    Run the Inventory Manager menu loop.
+    Presents options 1–6 and dispatches to the appropriate function.
+    Exits when the user selects option 6.
+    """
+    while True:
+        print("\n===== INVENTORY MANAGER =====")
+        print("1. View all items")
+        print("2. Add new item")
+        print("3. Remove item by SKU")
+        print("4. Update quantity by SKU")
+        print("5. Show total inventory value")
+        print("6. Exit")
+        choice = input("Choice: ").strip()
+
+        if choice == "1":
+            view_items(inventory)
+
+        elif choice == "2":
+            add_item(inventory)
+
+        elif choice == "3":
+            sku = input("  Enter SKU to remove: ").strip()
+            remove_item(inventory, sku)
+
+        elif choice == "4":
+            sku = input("  Enter SKU to update: ").strip()
+            while True:
+                try:
+                    qty = int(input("  New quantity: ").strip())
+                    if qty < 0:
+                        raise ValueError
+                    break
+                except ValueError:
+                    print("  ✗ Please enter a non-negative whole number.")
+            update_quantity(inventory, sku, qty)
+
+        elif choice == "5":
+            value = total_value(inventory)
+            print(f"  Total inventory value: ${value:,.2f}")
+
+        elif choice == "6":
+            print("Goodbye!")
+            break
+
+        else:
+            # Invalid input — no crash, just an informative message
+            print("  ✗ Invalid choice. Please enter a number from 1 to 6.")
+
+
+# =============================================================================
+# Exercise 2 — Customer Profile Manager (15 pts)
+# =============================================================================
+
+customers = {
+    "C001": {
+        "name":      "Alice Johnson",
+        "email":     "alice@example.com",
+        "tier":      "Silver",
+        "purchases": [120.00, 89.50, 240.75],
+    },
+    "C002": {
+        "name":      "Bob Smith",
+        "email":     "bob@example.com",
+        "tier":      "Bronze",
+        "purchases": [49.99, 19.99],
+    },
+    "C003": {
+        "name":      "Carol White",
+        "email":     "carol@example.com",
+        "tier":      "Silver",
+        "purchases": [1500.00, 2200.00, 1800.00, 600.00],
+    },
+    "C004": {
+        "name":      "David Lee",
+        "email":     "david@example.com",
+        "tier":      "Bronze",
+        "purchases": [75.00, 150.00, 95.50],
+    },
+}
+
+
+def summarize_customers(customers):
+    """
+    Print a summary line for every customer showing:
+    ID, name, email, tier, total spent, and average purchase.
+
+    Uses dict.items() to iterate over customer IDs and profiles together.
+
+    Args:
+        customers (dict): Mapping of customer_id -> customer profile dict.
+    """
+    print(f"\n  {'ID':<6} {'NAME':<18} {'EMAIL':<28} {'TIER':<8} {'TOTAL':>10} {'AVG':>10}")
+    print("  " + "-" * 82)
+
+    # .items() gives us both the key (customer_id) and value (profile) at once
+    for cid, profile in customers.items():
+        total   = sum(profile["purchases"])
+        average = total / len(profile["purchases"]) if profile["purchases"] else 0.0
+        print(
+            f"  {cid:<6} {profile['name']:<18} {profile['email']:<28}"
+            f" {profile['tier']:<8} {total:>10.2f} {average:>10.2f}"
+        )
+
+
+def find_top_customer(customers):
+    """
+    Return the customer ID (key) of the customer with the highest total spending.
+    Uses dict.items() to access both ID and profile for comparison.
+
+    Args:
+        customers (dict): Mapping of customer_id -> customer profile dict.
+
+    Returns:
+        str: The customer ID with the greatest total purchases.
+    """
+    # .items() lets us compare totals while keeping track of which ID they belong to
+    top_id = max(
+        customers.items(),
+        key=lambda kv: sum(kv[1]["purchases"])
+    )[0]
+    return top_id
+
+
+def upgrade_to_gold(customers):
+    """
+    Upgrade any customer whose total spending exceeds $5,000 to 'Gold' tier.
+    Uses dict.keys() to iterate over customer IDs and look up each profile.
+
+    Args:
+        customers (dict): Mapping of customer_id -> customer profile dict.
+                          Modified in-place.
+    """
+    upgraded = []
+
+    # .keys() gives us the IDs; we then index into the dict for the profile
+    for cid in customers.keys():
+        profile = customers[cid]
+        if sum(profile["purchases"]) > 5000:
+            profile["tier"] = "Gold"
+            upgraded.append(profile["name"])
+
+    if upgraded:
+        print(f"  ✓ Upgraded to Gold: {', '.join(upgraded)}")
+    else:
+        print("  No customers qualify for Gold tier at this time.")
+
+
+# =============================================================================
+# Exercise 3 — CSV Sales Processor (30 pts)
+# =============================================================================
+
+# Required CSV columns: date, rep_name, product, quantity, unit_price, region
+# See sales_data.csv — 18 rows across 3 regions (Northeast, Southeast, West)
+# and 3 reps (Sarah Kim, James Patel, Maria Lopez).
+
+CSV_PATH    = "sales_data.csv"
+REPORT_PATH = "sales_report.txt"
+
+
+# ---- Part A — Read and Parse (10 pts) ---------------------------------------
+
+def load_sales(path):
+    """
+    Read the CSV at `path` using csv.DictReader.
+
+    Performs type conversions on each row:
+        - quantity   -> int
+        - unit_price -> float
+        - revenue    -> float  (added field: quantity * unit_price)
+
+    Args:
+        path (str): File path to the CSV file.
+
+    Returns:
+        list[dict]: A list of row dicts with converted/added fields.
+
+    Raises:
+        FileNotFoundError: If `path` does not exist.
+    """
+    records = []
+
+    # newline="" is required by the csv module to avoid cross-platform issues
+    with open(path, newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh)
+        for row in reader:
+            row["quantity"]   = int(row["quantity"])
+            row["unit_price"] = float(row["unit_price"])
+            row["revenue"]    = row["quantity"] * row["unit_price"]  # derived field
+            records.append(row)
+
+    return records
+
+
+# ---- Part B — Analyze (10 pts) ----------------------------------------------
+
+def analyze_sales(records):
+    """
+    Compute summary statistics from a list of sale records.
+
+    Args:
+        records (list[dict]): Sales records as returned by load_sales().
+
+    Returns:
+        dict with keys:
+            total_revenue    (float)
+            average_revenue  (float)  – per transaction
+            top_rep          (dict)   – {"name": str, "revenue": float}
+            revenue_by_region(dict)   – {region: float, ...}
+            best_product     (dict)   – {"name": str, "units_sold": int}
+    """
+    if not records:
+        return {}
+
+    # --- total and average revenue ---
+    total_revenue   = sum(r["revenue"] for r in records)
+    average_revenue = total_revenue / len(records)
+
+    # --- revenue per rep ---
+    rep_revenue = {}
+    for r in records:
+        rep_revenue[r["rep_name"]] = rep_revenue.get(r["rep_name"], 0.0) + r["revenue"]
+
+    top_rep_name = max(rep_revenue, key=rep_revenue.get)
+    top_rep      = {"name": top_rep_name, "revenue": rep_revenue[top_rep_name]}
+
+    # --- revenue by region ---
+    revenue_by_region = {}
+    for r in records:
+        revenue_by_region[r["region"]] = (
+            revenue_by_region.get(r["region"], 0.0) + r["revenue"]
+        )
+
+    # --- best product by units sold ---
+    product_units = {}
+    for r in records:
+        product_units[r["product"]] = product_units.get(r["product"], 0) + r["quantity"]
+
+    best_product_name = max(product_units, key=product_units.get)
+    best_product      = {"name": best_product_name, "units_sold": product_units[best_product_name]}
+
+    return {
+        "total_revenue":     total_revenue,
+        "average_revenue":   average_revenue,
+        "top_rep":           top_rep,
+        "revenue_by_region": revenue_by_region,
+        "best_product":      best_product,
+    }
+
+
+# ---- Part C — Write Report (10 pts) -----------------------------------------
+
+def write_report(stats, path):
+    """
+    Write a formatted, human-readable sales report to `path`.
+
+    Report sections:
+        1. Overview       — total revenue, average per transaction
+        2. Top Rep        — name and revenue
+        3. Revenue by Region — aligned columns
+        4. Best Product   — name and units sold
+        5. Generated timestamp
+
+    Args:
+        stats (dict): Statistics dict as returned by analyze_sales().
+        path  (str):  File path to write the report to.
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    sep_major = "=" * 52
+    sep_minor = "-" * 52
+
+    with open(path, "w", encoding="utf-8") as fh:
+
+        # ----- Header -----
+        fh.write(sep_major + "\n")
+        fh.write("         SALES PERFORMANCE REPORT\n")
+        fh.write(sep_major + "\n")
+        fh.write(f"  Generated: {timestamp}\n\n")
+
+        # ----- Section 1: Overview -----
+        fh.write("OVERVIEW\n")
+        fh.write(sep_minor + "\n")
+        fh.write(f"  {'Total Revenue:':<28} ${stats['total_revenue']:>10,.2f}\n")
+        fh.write(f"  {'Avg Revenue per Transaction:':<28} ${stats['average_revenue']:>10,.2f}\n\n")
+
+        # ----- Section 2: Top Sales Rep -----
+        fh.write("TOP SALES REPRESENTATIVE\n")
+        fh.write(sep_minor + "\n")
+        rep = stats["top_rep"]
+        fh.write(f"  {'Name:':<28} {rep['name']}\n")
+        fh.write(f"  {'Revenue:':<28} ${rep['revenue']:>10,.2f}\n\n")
+
+        # ----- Section 3: Revenue by Region -----
+        fh.write("REVENUE BY REGION\n")
+        fh.write(sep_minor + "\n")
+        for region, rev in sorted(stats["revenue_by_region"].items()):
+            fh.write(f"  {region:<28} ${rev:>10,.2f}\n")
+        fh.write("\n")
+
+        # ----- Section 4: Best Product -----
+        fh.write("BEST-SELLING PRODUCT\n")
+        fh.write(sep_minor + "\n")
+        prod = stats["best_product"]
+        fh.write(f"  {'Product:':<28} {prod['name']}\n")
+        fh.write(f"  {'Units Sold:':<28} {prod['units_sold']:>10,}\n\n")
+
+        # ----- Footer -----
+        fh.write(sep_major + "\n")
+        fh.write("                  END OF REPORT\n")
+        fh.write(sep_major + "\n")
+
+
+# =============================================================================
+# Main
+# =============================================================================
+
+if __name__ == "__main__":
+
+    # ---- Exercise 1 ----
+    print("\n" + "=" * 60)
+    print("  EXERCISE 1 — Inventory Manager")
+    print("=" * 60)
+    inventory_menu()
+
+    # ---- Exercise 2 ----
+    print("\n" + "=" * 60)
+    print("  EXERCISE 2 — Customer Profile Manager")
+    print("=" * 60)
+
+    summarize_customers(customers)
+
+    top_id = find_top_customer(customers)
+    print(f"\n  Top customer by spending: {top_id} ({customers[top_id]['name']})")
+
+    print("\n  Checking Gold tier eligibility...")
+    upgrade_to_gold(customers)
+
+    print("\n  Updated customer summary:")
+    summarize_customers(customers)
+
+    # ---- Exercise 3 ----
+    print("\n" + "=" * 60)
+    print("  EXERCISE 3 — CSV Sales Processor")
+    print("=" * 60)
+
+    records = load_sales(CSV_PATH)
+    print(f"\n  Loaded {len(records)} records from '{CSV_PATH}'")
+
+    stats = analyze_sales(records)
+    print(f"  Total revenue: ${stats['total_revenue']:,.2f}")
+    print(f"  Top rep:       {stats['top_rep']['name']} (${stats['top_rep']['revenue']:,.2f})")
+    print(f"  Best product:  {stats['best_product']['name']} ({stats['best_product']['units_sold']} units)")
+
+    write_report(stats, REPORT_PATH)
+    print(f"\n  Report written to '{REPORT_PATH}'")
