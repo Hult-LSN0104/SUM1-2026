@@ -2,7 +2,7 @@
 LSN-0104 — Introduction to Programming with Python
 Problem Set 2: Control Structures & Functions
 
-Author: <your name here>
+Author: <Abigail Adugna>
 """
 
 
@@ -20,8 +20,14 @@ def get_discount(order_total):
         $500    – $999.99   -> 0.10
         $1,000+             -> 0.20
     """
-    # TODO: implement the tiered logic and return the rate
-    pass
+    if order_total >= 1000:
+        return 0.20
+    elif order_total >= 500:
+        return 0.10
+    elif order_total >= 100:
+        return 0.05
+    else:
+        return 0.00
 
 
 def apply_discount(order_total):
@@ -32,12 +38,12 @@ def apply_discount(order_total):
         "$750.00 order qualifies for a 10% discount. Final price: $675.00"
     Returns the final price after discount.
     """
-    # TODO:
-    #   - rate = get_discount(order_total)
-    #   - compute final_price
-    #   - print the formatted message
-    #   - return final_price
-    pass
+    rate = get_discount(order_total)
+    final_price = order_total - (order_total * rate)
+
+    print(f"${order_total:.2f} order qualifies for a {rate:.0%} discount. Final price: ${final_price:.2f}")
+
+    return final_price
 
 
 # =============================================================================
@@ -59,8 +65,37 @@ def check_loan(income, credit_score, loan_amount):
         monthly = (loan_amount * rate) / 12
     where `rate` is the annual interest rate as a decimal (e.g. 0.045).
     """
-    # TODO: implement the eligibility logic
-    pass
+
+    income = float(income)
+    credit_score = int(credit_score)
+    loan_amount = float(loan_amount)
+
+    if income < 30000:
+        print("Ineligible: income below minimum threshold")
+        return "Ineligible: income below minimum threshold"
+
+    if credit_score < 580:
+        print("Ineligible: credit score too low")
+        return "Ineligible: credit score too low"
+
+    if income >= 80000 and credit_score >= 750:
+        rate = 0.045
+        decision = "Approved: Premium rate (4.5%)"
+    elif income >= 50000 and credit_score >= 650:
+        rate = 0.065
+        decision = "Approved: Standard rate (6.5%)"
+    else:
+        rate = 0.099
+        decision = "Approved: Higher risk rate (9.9%)"
+
+    monthly = (loan_amount * rate) / 12
+
+    print(decision)
+    print(f"Estimated monthly payment: ${monthly:.2f}")
+
+    return decision
+
+
 
 
 # =============================================================================
@@ -77,8 +112,17 @@ def compute_stats(sales):
     Suggested return type: a dict like
         {"total": ..., "average": ..., "highest": ..., "lowest": ...}
     """
-    # TODO
-    pass
+    total = sum(sales)
+    average = total / len(sales)
+    highest = max(sales)
+    lowest = min(sales)
+
+    return {
+        "total": total,
+        "average": average,
+        "highest": highest,
+        "lowest": lowest
+    }
 
 
 def print_report(reps, sales):
@@ -89,9 +133,32 @@ def print_report(reps, sales):
       - Total, average, highest, lowest (call compute_stats())
       - A simple bar chart: each $1,000 in sales = one '█' character
     """
-    # TODO
-    pass
+    stats = compute_stats(sales)
 
+    print("Sales Report")
+    print("------------")
+
+    for index, rep in enumerate(reps):
+        sales_amount = sales[index]
+
+        if sales_amount == stats["highest"]:
+            print(f"{rep}: ${sales_amount} Top performer")
+        else:
+            print(f"{rep}: ${sales_amount}")
+
+    print("\nStatistics")
+    print("----------")
+    print(f"Total sales: ${stats['total']}")
+    print(f"Average sales: ${stats['average']:.2f}")
+    print(f"Highest sales: ${stats['highest']}")
+    print(f"Lowest sales: ${stats['lowest']}")
+
+    print("\nBar Chart")
+    print("---------")
+
+    for index, rep in enumerate(reps):
+        bar = "█" * (sales[index] // 1000)
+        print(f"{rep}: {bar}")
 
 # =============================================================================
 # Main — test cases
@@ -117,4 +184,6 @@ if __name__ == "__main__":
     # ---- Exercise 3 ----
     # print_report(reps, sales)
 
-    pass
+        pass 
+
+    
