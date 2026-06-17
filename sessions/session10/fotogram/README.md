@@ -32,7 +32,7 @@ Hultagram/
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/yourusername/hultagram.git
+   git sparse-checkout set sessions/session10/fotogram
    cd hultagram
    ```
 
@@ -51,8 +51,8 @@ Hultagram/
    ```sh
    python app.py
    ```
-   The application should start on `http://127.0.0.1:5000/`
-   Codespaces may show a pop-up in the botton right that has a button to open in a browser. 
+   The application should start on `http://127.0.0.1:5000/.`
+   Codespaces may show a pop-up in the bottom-right with a button to open in a browser. 
 
 6. **Test functionality**
    - Create several posts with different images
