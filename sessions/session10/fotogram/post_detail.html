@@ -1,0 +1,63 @@
+<!-- templates/post_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %}View Post | Photogram{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="row g-0">
+                <!-- Left side - Image -->
+                <div class="col-md-7">
+                    <img src="{{ post.image_filename|file_url }}" 
+                         class="img-fluid rounded-start" alt="{{ post.caption}}"
+                         style="max-height: 80vh; width: 100%; object-fit: cover;">
+                </div>
+                
+                <!-- Right side - Details -->
+                <div class="col-md-5">
+                    <div class="post-header border-bottom">
+                        <div class="profile-icon">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <span class="post-username">username</span>
+                    </div>
+                    
+                    <div class="p-3">
+                        <!-- Caption -->
+                        <p>
+                            <strong>username</strong> This is where the caption would appear.
+                        </p>
+                        
+                        <!-- Timestamp -->
+                        <p class="text-muted small">
+                            Posted on February 20, 2023
+                        </p>
+                        
+                        <!-- Likes -->
+                        <div class="d-flex align-items-center mb-3">
+                            <form action="#" method="POST" class="me-2">
+                                <button type="submit" class="btn btn-sm text-danger">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </form>
+                            <span><strong>42</strong> likes</span>
+                        </div>
+                        
+                        <!-- TODO BONUS: Comments would go here -->
+                        
+                        <!-- TODO BONUS: Comment form would go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Feed
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+<!-- templates/create.html -->
+{% extends 'base.html' %}
+
+{% block title %}Create New Post | Photogram{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Create New Post</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Choose an image</label>
+                        <input type="file" class="form-control" id="image" name="image" required>
+                        <div class="form-text">Supported formats: JPG, PNG, GIF</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="caption" class="form-label">Caption</label>
+                        <textarea class="form-control" id="caption" name="caption" rows="3" placeholder="Write a caption..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-cloud-upload"></i> Share Post
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
