@@ -51,9 +51,10 @@ Hultagram/
    ```sh
    python app.py
    ```
-   The application will start on `http://127.0.0.1:5000/`
+   The application should start on `http://127.0.0.1:5000/`
+   Codespaces may show a pop-up in the botton right that has a button to open in a browser. 
 
-5. **Test functionality**
+6. **Test functionality**
    - Create several posts with different images
    - Add comments to posts
    - Like posts to verify functionality
